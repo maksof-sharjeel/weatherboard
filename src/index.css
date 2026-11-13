@@ -1,0 +1,147 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Calm, low-saturation palette: neutrals carry the layout, one blue accent carries interaction. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --ink: #0f1424;
+  --muted: #5b6475;
+  --faint: #8a93a3;
+  --line: #e3e6eb;
+  --accent: #3355d1;
+  --accent-ink: #ffffff;
+  --accent-soft: #e8edfc;
+  --danger: #c4322b;
+  --danger-soft: #fdeeed;
+  --warn: #9a5b00;
+  --warn-soft: #fff4e0;
+  --ok: #187a4a;
+  --hero-from: #1e2a5a;
+  --hero-to: #3355d1;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #0c0e13;
+  --surface: #14171e;
+  --surface-2: #1b1f28;
+  --ink: #e9ecf2;
+  --muted: #9aa3b4;
+  --faint: #6b7385;
+  --line: #262b36;
+  --accent: #7d97ff;
+  --accent-ink: #0c0e13;
+  --accent-soft: #1d2440;
+  --danger: #ff7b72;
+  --danger-soft: #2c1615;
+  --warn: #f0b04c;
+  --warn-soft: #2a2010;
+  --ok: #4cc38a;
+  --hero-from: #141a36;
+  --hero-to: #263c96;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-ok: var(--ok);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--hero-from), var(--hero-to));
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--line) 37%, var(--surface-2) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* ---------- Animated weather icons ---------- */
+.wi-sun-rays { transform-origin: 32px 32px; animation: wi-spin 24s linear infinite; }
+.wi-cloud { animation: wi-drift 6s ease-in-out infinite; }
+.wi-cloud-back { animation: wi-drift 8s ease-in-out infinite reverse; }
+.wi-drop { animation: wi-fall 1.1s linear infinite; }
+.wi-drop:nth-of-type(2) { animation-delay: 0.35s; }
+.wi-drop:nth-of-type(3) { animation-delay: 0.7s; }
+.wi-flake { animation: wi-snow 2.4s linear infinite; }
+.wi-flake:nth-of-type(2) { animation-delay: 0.8s; }
+.wi-flake:nth-of-type(3) { animation-delay: 1.6s; }
+.wi-bolt { animation: wi-flash 2.8s ease-in-out infinite; }
+.wi-fog-line { animation: wi-drift 5s ease-in-out infinite; }
+.wi-fog-line:nth-of-type(2) { animation-duration: 7s; animation-direction: reverse; }
+
+@keyframes wi-spin { to { transform: rotate(360deg); } }
+@keyframes wi-drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+@keyframes wi-fall { 0% { transform: translateY(-4px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
+@keyframes wi-snow { 0% { transform: translate(0, -4px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(2px, 9px); opacity: 0; } }
+@keyframes wi-flash { 0%, 70%, 100% { opacity: 1; } 75% { opacity: 0.2; } 80% { opacity: 1; } 85% { opacity: 0.3; } }
+
+.fade-in { animation: fade-in 0.25s ease-out both; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+dialog::backdrop {
+  background: rgb(8 10 16 / 0.5);
+  backdrop-filter: blur(2px);
+}
