@@ -2,7 +2,7 @@
 
 A responsive, installable weather dashboard: search any city, see current conditions and a 5-day forecast, keep up to 5 favourites, get a daily morning reminder, and keep working offline for the last city you viewed.
 
-**Live:** _add Vercel URL here_ · **Repo:** _add GitHub URL here_
+**Live:** _add Vercel URL here_ · **Repo:** [github.com/maksof-sharjeel/weatherboard](https://github.com/maksof-sharjeel/weatherboard)
 
 Built with React 19, TypeScript, Vite, Tailwind CSS v4 and Workbox (via `vite-plugin-pwa`). There is no backend.
 

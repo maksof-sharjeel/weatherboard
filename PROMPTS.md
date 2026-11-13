@@ -57,4 +57,56 @@ For the visual check it drove headless Chrome at 375/768/1280, measured horizont
 
 ---
 
+### 4. Gap check against the brief
+
+> is pdf ke hisba se current project me kya kya kam remaining he
+
+*Gloss:* "According to the PDF, what work is still remaining in the project?"
+
+The agent ran the tests, build and lint (all passing), then listed what was left: API keys, a missing `npm test` script that README referred to, git/GitHub, deployment, README links, PROMPTS.md, and the submission email.
+
+### 5–8. API keys
+
+> ye phle se generate ki hui use hojagyi *(screenshot of the OpenWeatherMap API keys page)*
+
+*Gloss:* "Will this already-generated key work?"
+
+> key kha se milegi *(screenshot of RapidAPI)* · *(screenshots of the GeoDB Authorization/Headers tabs)*
+
+*Gloss:* "Where do I get the key?"
+
+The agent added both keys to `.env` (which is gitignored) and checked each one with a live request before relying on it, rather than assuming it worked.
+
+> .env.example ye remove kardu extra he ye
+
+*Gloss:* "Should I remove .env.example? It seems extra."
+
+The agent advised keeping it: README's setup step depends on it, and it documents the required variables without holding secrets.
+
+### 9–12. Local testing
+
+> Ok next mujhe Url du kha kese test karunga me
+
+*Gloss:* "Give me a URL. How do I test it?"
+
+> service worker kese test karun *(then screenshots of an empty Service Workers panel)*
+
+*Gloss:* "How do I test the service worker?"
+
+**Debugging note:** no service worker was registered. The agent checked the registration code and confirmed `sw.js` was served, then spotted in the screenshot that the page was opened at `192.168.1.63:4173` (plain HTTP on a LAN IP). That isn't a secure context, so the browser refuses service workers there. Switching to `localhost:4173` fixed it, and no code change was needed.
+
+> test kese karun notification wala kam
+
+*Gloss:* "How do I test the notification feature?"
+
+### 13–14. GitHub
+
+> mujhe github per repo banae keliy description r nam wagerta likh kar du
+
+*Gloss:* "Write the name, description and so on for creating the GitHub repo."
+
+> https://github.com/maksof-sharjeel/weatherboard
+
+The agent added the `test` script, initialised git, and pushed.
+
 <!-- Append further prompts below, in order. -->
